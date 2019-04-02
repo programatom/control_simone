@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Exportar datos</h4>
+        <h6 class="card-subtitle">Exportar datos a Excel, PDF & Imprimir</h6>
+        <div class="table-responsive m-t-40">
+          <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Usuario Nom</th>
+                <th>Periodicidad</th>
+                <th>Dia de entrega</th>
+                <th>Estado</th>
+                <th>Repartidor</th>
+                <th>Repartidor excepc.</th>
+                <th>Forma de pago</th>
+              </tr>
+            </thead>
+            <tr *ngFor="let pedido of pedidos">
+              <th><button class="btn waves-effect waves-light btn-rounded btn-sm btn-success" (click)="irAPedido(pedido)">Ver mas</button></th>
+              <td>{{pedido.usuario[0].id}}</td>
+              <td>{{pedido.usuario[0].name}}</td>
+              <td>{{pedido.periodicidad}}</td>
+              <td>{{pedido.dia_de_entrega}}</td>
+              <td>{{pedido.estado}}</td>
+              <td>{{pedido.repartidor_habitual}}</td>
+              <td>{{pedido.repartidor_excepcional}}</td>
+              <td>{{pedido.forma_de_pago}}</td>
+            </tr>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-12">
+    <button
+    class="btn waves-effect waves-light btn-rounded btn-block btn-success"
+    (click)="mostrarPedidoNuevoForm()">
+      {{textoBotonPedido}}
+    </button>
+  </div>
+</div>
+
+<app-pedido-form id="pedido-form-1" nuevo="true" pedido="null"></app-pedido-form>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->

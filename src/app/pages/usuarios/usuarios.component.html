@@ -1,0 +1,40 @@
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Exportar datos</h4>
+        <h6 class="card-subtitle">Exportar datos a Excel, PDF & Imprimir</h6>
+        <div class="table-responsive m-t-40">
+          <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Usuario Nom</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Creado en</th>
+                <th>Actualizado en</th>
+
+              </tr>
+            </thead>
+            <tr *ngFor="let usuario of usuarios">
+              <td><button class="btn waves-effect waves-light btn-rounded btn-sm btn-success" (click)="irAUsuario(usuario)">Ver mas</button></td>
+              <td>{{usuario.id}}</td>
+              <td>{{usuario.name}}</td>
+              <td>{{usuario.email}}</td>
+              <td>{{usuario.role}}</td>
+              <td>{{usuario.created_at}}</td>
+              <td>{{usuario.updated_at}}</td>
+            </tr>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-usuario-form nuevo ="true" usuario ="null"></app-usuario-form>

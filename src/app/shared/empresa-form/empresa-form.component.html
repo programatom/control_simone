@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{title}}</h4>
+        <h6 class="card-subtitle">{{subtitle}}</h6>
+        <form class="form-material m-t-40 row">
+
+          <div class="form-group col-md-4 m-t-20">
+            <label>Razon social</label>
+            <input [(ngModel)]="empresa.razon_social" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+          </div>
+
+          <div class="form-group col-md-4 m-t-20">
+            <label>CUIT</label>
+            <input [(ngModel)]="empresa.CUIT" [ngModelOptions]="{standalone: true}" type="number" class="form-control">
+          </div>
+
+          <div class="form-group col-md-4 m-t-20">
+            <label>Domicilio fiscal</label>
+            <input [(ngModel)]="empresa.dom_fiscal" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+          </div>
+
+          <div class="form-group col-md-4 m-t-20">
+            <label>Saldo</label>
+            <input [(ngModel)]="empresa.saldo" [ngModelOptions]="{standalone: true}" type="number" class="form-control">
+          </div>
+
+          <div class="form-group col-md-4 m-t-20">
+            <label>Telefono</label>
+            <input [(ngModel)]="empresa.telefono" [ngModelOptions]="{standalone: true}" type="number" class="form-control">
+          </div>
+
+          <div class="form-group col-md-4 m-t-20">
+            <label>Calle</label>
+            <input [(ngModel)]="empresa.calle" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+          </div>
+
+          <div class="form-group col-md-4 m-t-20">
+            <label>Numero</label>
+            <input [(ngModel)]="empresa.numero" [ngModelOptions]="{standalone: true}" type="number" class="form-control">
+          </div>
+
+          <div class="form-group col-md-4 m-t-20">
+            <label>Piso</label>
+            <input [(ngModel)]="empresa.piso" [ngModelOptions]="{standalone: true}" type="number" class="form-control">
+          </div>
+
+          <div class="form-group col-md-4 m-t-20">
+            <label>Nº departamento</label>
+            <input [(ngModel)]="empresa.depto" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+          </div>
+
+          <div class="form-group col-md-4 m-t-20">
+            <label>Nombre de la persona que recibe</label>
+            <input [(ngModel)]="empresa.nombre_receptor" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+          </div>
+
+          <div class="col-md-4 m-t-20">
+            <h4>Provincia</h4>
+            <select [(ngModel)]="empresa.provincia" [ngModelOptions]="{standalone: true}" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
+              <option value = "Provincia de Buenos Aires">Provincia de Buenos Aires</option>
+              <option value = "Ciudad Autonoma de Buenos Aires">Ciudad Autonoma de Buenos Aires</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4 m-t-20">
+            <label>Localidad</label>
+            <input [(ngModel)]="empresa.localidad" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+          </div>
+          <div class="form-group col-md-4 m-t-20">
+            <label>Obervaciones</label>
+            <input [(ngModel)]="empresa.observaciones" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+          </div>
+        </form>
+        <br>
+        <div class="row">
+          <div class="col-12">
+            <button class="btn waves-effect waves-light btn-rounded btn-block btn-success" (click)="guardarEmpresa()">Guardar empresa</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

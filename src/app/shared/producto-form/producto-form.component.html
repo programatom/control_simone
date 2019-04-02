@@ -1,0 +1,125 @@
+<div class="row">
+  <div class="col-lg-6 col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          <h2>Portada</h2>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <label class="btn btn-primary btn-block">
+              Cargar imagen
+              <input type="file" name="file" hidden multiple (change)="cargarImagen($event, 'principal')" enctype="multipart/form-data">
+            </label>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <button class="btn btn-primary btn-block" (click)="irALaGaleria(content, 'principal')">
+              Galeria
+            </button>
+          </div>
+          <div class="col-lg-12 col-md-12">
+            <img [src]="imagenPrincipalObj.url" style="height:auto;width:100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-12">
+    <div class="card">
+      <div class="card-body">
+
+        <div class="form-group col-md-12 m-t-20">
+          <label>Nombre</label>
+          <input [(ngModel)]="producto.nombre" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+        </div>
+        <div class="form-group col-md-12 m-t-20">
+          <label>Precio</label>
+          <input [(ngModel)]="producto.precio" [ngModelOptions]="{standalone: true}" type="number" class="form-control">
+        </div>
+        <div class="form-group col-md-12 m-t-20">
+          <label>Posicion</label>
+          <input [(ngModel)]="producto.posicion" [ngModelOptions]="{standalone: true}" type="number" class="form-control">
+        </div>
+        <div class="form-group col-md-12 m-t-20">
+          <label>Descripcion</label>
+          <textarea [(ngModel)]="producto.descripcion" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+          </textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--
+
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      <h2>Secundarias</h2>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <label class="btn btn-primary upload-btn">
+          Cargar imagen
+          <input type="file" name="file" hidden multiple (change)="cargarImagen($event, 'secundaria')" enctype="multipart/form-data">
+        </label>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <label class="btn btn-primary upload-btn" (click)="irALaGaleria(content, 'secundaria')">
+          Galeria
+        </label>
+      </div>
+      <div class="col-lg-6 col-md-12" *ngFor="let imagen of imagenesSecundariasArray; let i = index">
+        <img [src]="imagen.url" style="height:auto;width:100%">
+        <div class="row">
+          <div class="col-lg-6 col-md-12" style="text-align:center">
+            <button class="btn waves-effect waves-light btn-sm btn-danger" (click)="eliminarImagenSecundaria(i)">
+              Eliminar imagen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<div class="row">
+
+  <div class="col-12">
+    <button class="btn waves-effect waves-light btn-rounded btn-block btn-success" (click)="guardarProducto()">
+      {{textoBotonFinal}}
+    </button>
+  </div>
+
+</div>
+
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Elegir imagen de la galería</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-6" *ngFor="let imagen of imagenes; let i = index">
+        <div class="row">
+          <div class="col-12">
+            <img [src]="url_assets + imagen.url" style="height:auto;width:100%">
+          </div>
+          <div class="col-12" style="text-align:center">
+            <button class="btn waves-effect waves-light btn-rounded btn-sm btn-danger" (click)="eliminarImagen(imagen, i)">
+              Eliminar imagen
+            </button>
+          </div>
+          <div class="col-12" style="text-align:center">
+            <button class="btn waves-effect waves-light btn-rounded btn-sm btn-success" (click)="elegirImagenDesdeGaleria(imagen)">
+              Elegir imagen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

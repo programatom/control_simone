@@ -1,0 +1,102 @@
+<div class="row">
+  <div class="col-lg-6 col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"><strong>Usuario</strong></h1>
+        <h3 class="card-title"><strong>Rol: </strong>{{pedido.usuario[0].role}}</h3>
+        <h3 class="card-title"><strong>Nombre: </strong>{{pedido.usuario[0].name}}</h3>
+        <h3 class="card-title"><strong>Email: </strong>{{pedido.usuario[0].email}}</h3>
+        <h3 class="card-subtitle"><strong>Usuario creado en: </strong>{{pedido.usuario[0].created_at}}</h3>
+        <h1 class="card-title"><strong>REPARTIDORES</strong></h1>
+        <h3 class="card-title"><strong>Habitual: </strong>{{pedido.repartidor_habitual}}</h3>
+        <h3 class="card-title"><strong>Excepcional: </strong>{{pedido.repartidor_excepcional}}</h3>
+        <h1 class="card-title"><strong>OTROS DATOS</strong></h1>
+        <h3 class="card-title"><strong>Periodicidad: </strong>{{pedido.periodicidad}}</h3>
+        <h3 class="card-title"><strong>Estado: </strong>{{pedido.estado}}</h3>
+        <h3 class="card-title"><strong>Forma de pago: </strong>{{pedido.forma_de_pago}}</h3>
+        <h3 class="card-subtitle"><strong>Pedido creado en: </strong>{{pedido.created_at}}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"><strong>Productos</strong></h1>
+        <div class="row">
+          <div class="col-lg-6 col-md-12" *ngFor="let producto of pedido.productos">
+            <div class="card">
+              <h4 class="card-title">{{producto.nombre}}</h4>
+              <h4 class="card-subtitle">Precio: $ {{producto.precio}}</h4>
+              <h4 class="card-subtitle">Cantidad: {{producto.pivot.cantidad}}</h4>
+            </div>
+          </div>
+          <div class="col-lg-8 col-md-12">
+            <div class="card">
+              <h4 class="card-title"><strong>TOTAL: </strong>$ {{totalProductos}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title"><strong>Entregas</strong></h1>
+    <h4 class="card-subtitle"><strong>{{activeDisplayEntregas}}</strong></h4>
+    <div class="row">
+      <div class="col-lg-4 col-md-6">
+        <button class="btn waves-effect waves-light btn-rounded btn-block btn-success" (click)="cambiarDisplayEntregas('semana')">Ésta semana</button>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <button class="btn waves-effect waves-light btn-rounded btn-block btn-success" (click)="cambiarDisplayEntregas('mes')">Éste mes</button>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <button class="btn waves-effect waves-light btn-rounded btn-block btn-success" (click)="cambiarDisplayEntregas('historico')">Histórico</button>
+      </div>
+    </div>
+    <br><br>
+    <div class="row" id = "esteMes">
+      <div class="col-lg-6" *ngFor="let entrega of esteMes">
+        <div class="card">
+          <h4 class="card-title"><strong>Fecha de entrega: </strong> {{entrega.fecha_de_entrega}}</h4>
+          <h4 class="card-title"><strong>Estado:</strong> {{entrega.estado}}</h4>
+          <h4 class="card-title"><strong>Observaciones: </strong> {{entrega.observaciones}}</h4>
+          <h4 class="card-title"><strong>Actualizada: </strong> {{entrega.updated_at}}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="estaSemana">
+      <div class="col-lg-6 col-md-12" *ngFor="let entrega of estaSemana">
+        <div class="card">
+          <h4 class="card-title"><strong>Fecha de entrega: </strong> {{entrega.fecha_de_entrega}}</h4>
+          <h4 class="card-title"><strong>Estado:</strong> {{entrega.estado}}</h4>
+          <h4 class="card-title"><strong>Observaciones: </strong> {{entrega.observaciones}}</h4>
+          <h4 class="card-title"><strong>Actualizada: </strong> {{entrega.updated_at}}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="historico">
+      <div class="col-lg-6 col-md-12" *ngFor="let entrega of historico">
+        <div class="card">
+          <h4 class="card-title"><strong>Fecha de entrega: </strong> {{entrega.fecha_de_entrega}}</h4>
+          <h4 class="card-title"><strong>Estado:</strong> {{entrega.estado}}</h4>
+          <h4 class="card-title"><strong>Observaciones: </strong> {{entrega.observaciones}}</h4>
+          <h4 class="card-title"><strong>Actualizada: </strong> {{entrega.updated_at}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <button
+    class="btn waves-effect waves-light btn-rounded btn-block btn-success"
+    (click)="editarPedido()">
+      {{textoBotonPedido}}
+    </button>
+  </div>
+</div>
+
+<app-pedido-form *ngIf="componentInit" id="pedido-form-2" nuevo="false" [pedido]="pedido"></app-pedido-form>

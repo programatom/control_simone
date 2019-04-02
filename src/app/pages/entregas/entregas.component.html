@@ -1,0 +1,36 @@
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Exportar datos</h4>
+        <h6 class="card-subtitle">Exportar datos a Excel, PDF & Imprimir</h6>
+        <div class="table-responsive m-t-40">
+          <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>Fecha de entrega</th>
+                <th>Usuario</th>
+                <th>Estado</th>
+                <th>Tipo de usuario</th>
+              </tr>
+            </thead>
+            <tr *ngFor="let entrega of entregas">
+              <td>{{entrega.fecha_de_entrega}}</td>
+              <td>{{entrega.usuario.name}}</td>
+              <td>{{entrega.estado}}</td>
+              <td>{{entrega.usuario.role}}</td>
+            </tr>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->

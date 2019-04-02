@@ -1,0 +1,222 @@
+
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          <strong>
+            Hay {{muestrasGratisSinVerCount}} muestras grátis nuevas sin ver
+          </strong>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="row">
+          <div class="col-2">
+          </div>
+          <div class="col-4">
+            <strong>
+              Email
+            </strong>
+          </div>
+          <div class="col-6">
+            <strong>
+              Fecha de creación
+            </strong>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-lg-12" *ngFor="let muestra of muestrasGratisSinVer; let i = index">
+        <div class="row custom-row">
+          <div class="col-2">
+            <button class="btn waves-effect waves-light btn-rounded btn-sm btn-success" (click)="irAMuestra(muestra, index, content)">Ver mas</button>
+          </div>
+          <div class="col-4">
+            {{muestra.email}}
+          </div>
+          <div class="col-6">
+            {{muestra.created_at}}
+          </div>
+        </div>
+        <br>
+      </div>
+      <div *ngIf="muestrasGratisSinVer.length != muestrasGratisSinVerRaw.length">
+        Mostrando las primeras 15 entradas
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-md-6 col-12">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              <strong>
+                Hay {{pedidosSinVerCount}} pedidos nuevos sin ver
+              </strong>
+            </div>
+          </div>
+          <div class="col-12 col-md-12 col-lg-12">
+            <div class="row">
+              <div class="col-2">
+              </div>
+              <div class="col-4">
+                <strong>
+                  Email
+                </strong>
+              </div>
+              <div class="col-6">
+                <strong>
+                  Fecha de creación
+                </strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-12 col-lg-12" *ngFor="let pedido of pedidosSinVer; let i = index">
+            <div class="row custom-row">
+              <div class="col-2">
+                <button class="btn waves-effect waves-light btn-rounded btn-sm btn-success" (click)="irAPedido(pedido, index)">Ver mas</button>
+              </div>
+              <div class="col-4">
+                {{pedido.usuario[0].email}}
+              </div>
+              <div class="col-6">
+                {{pedido.created_at}}
+              </div>
+            </div>
+            <br>
+          </div>
+          <div *ngIf="pedidosSinVer.length != pedidosSinVerRaw.length">
+            Mostrando las primeras 15 entradas
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-md-6 col-12">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              <strong>
+                Hay {{pedidosSinDatosCount}} pedidos sin datos
+              </strong>
+            </div>
+          </div>
+          <div class="col-12 col-md-12 col-lg-12">
+            <div class="row">
+              <div class="col-2">
+              </div>
+              <div class="col-4">
+                <strong>
+                  Email
+                </strong>
+              </div>
+              <div class="col-6">
+                <strong>
+                  Fecha de creación
+                </strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-12 col-lg-12" *ngFor="let pedido of pedidosSinDatos; let i = index">
+            <div class="row custom-row">
+              <div class="col-2">
+                <button class="btn waves-effect waves-light btn-rounded btn-sm btn-success" (click)="irAPedido(pedido, index)">Ver mas</button>
+              </div>
+              <div class="col-4">
+                {{pedido.usuario[0].email}}
+              </div>
+              <div class="col-6">
+                {{pedido.created_at}}
+              </div>
+            </div>
+            <br>
+          </div>
+          <div *ngIf="pedidosSinDatos.length != pedidosSinDatosRaw.length">
+            Mostrando las primeras 15 entradas
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Pedido de muestra grátis</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+
+      <div class="col-12">
+        <div class="row">
+          <div class="col-3">
+            <strong>Email</strong>
+          </div>
+          <div class="col-9" style="text-align:center">
+            {{muestraElegida.email}}
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-3">
+            <strong>Nombre</strong>
+          </div>
+          <div class="col-9" style="text-align:center">
+            {{muestraElegida.nombre}}
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-3">
+            <strong>Barrio/Localidad</strong>
+          </div>
+          <div class="col-9" style="text-align:center">
+            {{muestraElegida.barrio_localidad}}
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-3">
+            <strong>Teléfono</strong>
+          </div>
+          <div class="col-9" style="text-align:center">
+            {{muestraElegida.telefono}}
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-3">
+            <strong>Creado en</strong>
+          </div>
+          <div class="col-9" style="text-align:center">
+            {{muestraElegida.created_at}}
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-3">
+            <strong>Mensaje</strong>
+          </div>
+          <div class="col-9" style="text-align:center">
+            {{muestraElegida.mensaje}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

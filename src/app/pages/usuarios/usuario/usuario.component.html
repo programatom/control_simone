@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-lg-6 col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"><strong>Usuario</strong></h1>
+        <h3 class="card-title"><strong>ID: </strong>{{usuario.id}}</h3>
+        <h3 class="card-title"><strong>Rol: </strong>{{usuario.role}}</h3>
+        <h3 class="card-title"><strong>Nombre: </strong>{{usuario.name}}</h3>
+        <h3 class="card-title"><strong>Email: </strong>{{usuario.email}}</h3>
+        <h3 class="card-subtitle"><strong>Creado en: </strong>{{usuario.created_at}}</h3>
+        <h3 class="card-subtitle"><strong>Actualizado en: </strong>{{usuario.updated_at}}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <button
+    class="btn waves-effect waves-light btn-rounded btn-block btn-success"
+    (click)="mostrarUsuario()">
+      {{textoBotonUsuario}}
+    </button>
+  </div>
+</div>
+ <br>
+
+<app-usuario-form id ="usuario-form-edit" nuevo ="false" [usuario] ="usuario" *ngIf="dataInit"></app-usuario-form>
+
+<div class="row">
+  <div class="col-12">
+    <button
+    class="btn waves-effect waves-light btn-rounded btn-block btn-success"
+    (click)="mostrarRol()">
+      {{textoBotonRol}}
+    </button>
+  </div>
+</div>
+<br>
+
+<app-particular-form id="particular-form" [particular] ="data_rol" *ngIf="dataInit && usuario.role == 'particular'"></app-particular-form>
+
+<app-empresa-form id="empresa-form" [empresa]="data_rol" *ngIf="dataInit && usuario.role == 'empresa'"></app-empresa-form>
+
+<app-empleado-form id="empleado-form" [empleado]="data_rol" *ngIf="dataInit && usuario.role == 'empleado'"></app-empleado-form>

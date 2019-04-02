@@ -1,0 +1,123 @@
+
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{title}}</h4>
+        <h6 class="card-subtitle">{{subtitle}}</h6>
+        <form class="form-material m-t-40 row">
+          <div class="form-group col-md-4 m-t-20">
+            <label>ID del usuario</label>
+            <input [disabled] = "this.nuevo == 'false'"[(ngModel)]="pedido.user_id" [ngModelOptions]="{standalone: true}" type="number" class="form-control form-control-line">
+          </div>
+          <div class="form-group col-md-4 m-t-20">
+            <label>Dia / dias de entrega</label>
+            <input [(ngModel)]="pedido.dia_de_entrega" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+          </div>
+          <div class="form-group col-md-4 m-t-20">
+            <label>Descuento</label>
+            <input [(ngModel)]="pedido.descuento" [ngModelOptions]="{standalone: true}" type="number" class="form-control">
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-md-4 m-t-20">
+            <h4>Periodicidad</h4>
+            <select [(ngModel)]="pedido.periodicidad" id="periodicidad" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
+              <option value = "semanal">Semanal</option>
+              <option value = "mensual">Mensual</option>
+              <option value = "quincenal">Quincenal</option>
+              <option value = "diaria">Diaria</option>
+            </select>
+          </div>
+          <div class="col-md-4 m-t-20">
+            <h4>Repartidor habitual</h4>
+            <select [(ngModel)]="pedido.repartidor_habitual" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
+              <option *ngFor="let empleado of empleados" [value] = "empleado">{{empleado}}</option>
+            </select>
+          </div>
+          <div class="col-md-4 m-t-20">
+            <h4>Repartidor excepcional</h4>
+            <select [(ngModel)]="pedido.repartidor_excepcional" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
+              <option *ngFor="let empleado of empleados" [value] = "empleado">{{empleado}}</option>
+            </select>
+          </div>
+          <div class="col-md-4 m-t-20">
+            <h4>Estado</h4>
+            <select [(ngModel)]="pedido.estado" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
+              <option value = "cancelada">Cancelado</option>
+              <option value = "en proceso">En proceso</option>
+              <option value = "pausada">Pausado</option>
+            </select>
+          </div>
+          <div class="col-md-4 m-t-20">
+            <h4>Forma de pago</h4>
+            <select [(ngModel)]="pedido.forma_de_pago" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
+              <option value = "efectivo">Efectivo</option>
+              <option value = "cheque">Cheque</option>
+            </select>
+          </div>
+          <div class="col-md-4 m-t-20">
+            <h4>Tipo de pedido</h4>
+            <select [(ngModel)]="pedido.tipo_de_pedido" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
+              <option value = "normal">Normal</option>
+              <option value = "prueba">Prueba</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Agregar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let producto of productos">
+                    <td>{{producto.id}}</td>
+                    <td>{{producto.nombre}}</td>
+                    <td>$ {{producto.precio}}</td>
+                    <td><button class="btn waves-effect waves-light btn-rounded btn-sm btn-primary" (click)="agregarProductoAPedidoNuevo(producto)">Agregar al pedido</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <h2>Productos del pedido</h2>
+            <div class="row">
+              <div class="col-12" *ngFor="let producto of productosNuevos; let i = index">
+                <div class="card">
+                  <div class="card-title">
+                    <strong>Nombre: </strong>{{producto.nombre}}
+                  </div>
+                  <div class="card-title">
+                    <strong>Precio: </strong>$ {{producto.precio}}
+                  </div>
+                  <div class="card-title">
+                    <strong>Cantidad: </strong>{{producto.cantidad}}
+                  </div>
+                  <div class="card-title">
+                    <strong>Total: </strong>$ {{producto.total}}
+                  </div>
+                  <button class="btn waves-effect waves-light btn-rounded btn-danger" (click)="eliminarProductoAPedidoNuevo(i)">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button class="btn waves-effect waves-light btn-rounded btn-block btn-success" (click)="guardarPedido()">Guardar pedido</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

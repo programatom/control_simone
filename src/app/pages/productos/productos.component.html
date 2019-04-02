@@ -1,0 +1,34 @@
+<div class="row el-element-overlay">
+  <div class="col-md-12">
+    <button class="btn waves-effect waves-light btn-rounded btn-block btn-success" (click)="nuevoProducto()">
+      Ingresar un producto nuevo
+    </button>
+  </div>
+  <br><br>
+  <div class="col-lg-3 col-md-6" *ngFor="let producto of productos">
+    <div class="card">
+      <div class="el-card-item">
+        <div class="el-card-avatar el-overlay-1"> <img [src]="producto.imagen_principal" alt="user" />
+          <div class="el-overlay">
+            <ul class="el-info">
+              <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="el-card-content">
+          <h3 class="box-title">{{producto.nombre}}</h3> <br>
+          <strong>Precio: </strong> $ {{producto.precio}} <br>
+          <small>{{producto.descripcion}}</small>
+          <br />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <button class="btn waves-effect waves-light btn-block btn-success" (click)="modificarProducto(producto)">
+            Modificar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
