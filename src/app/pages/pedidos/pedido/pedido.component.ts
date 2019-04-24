@@ -60,7 +60,8 @@ export class PedidoComponent implements OnInit {
         this.pedidosServ.getPedidosShowAdmin(TOKEN, params.get("id"))
       )
     ).subscribe((data) => {
-      this.pedido = data.data[0];
+      console.log(data)
+      this.pedido = data.data;
       console.log(this.pedido)
       this.componentInit = true;
       setTimeout(()=>{

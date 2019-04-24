@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="usuario.role!= 'admin'">
   <div class="col-12">
     <button
     class="btn waves-effect waves-light btn-rounded btn-block btn-success"
@@ -25,9 +25,9 @@
 </div>
  <br>
 
-<app-usuario-form id ="usuario-form-edit" nuevo ="false" [usuario] ="usuario" *ngIf="dataInit"></app-usuario-form>
+<app-usuario-form id ="usuario-form-edit" nuevo ="false" [usuario] ="usuario" *ngIf="dataInit && usuario.role != 'admin'"></app-usuario-form>
 
-<div class="row">
+<div class="row" *ngIf="usuario.role != 'admin'">
   <div class="col-12">
     <button
     class="btn waves-effect waves-light btn-rounded btn-block btn-success"

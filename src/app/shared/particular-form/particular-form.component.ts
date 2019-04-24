@@ -12,7 +12,6 @@ export class ParticularFormComponent implements OnInit {
   @Input('particular') particularInput: any;
 
   particular = new Object() as {
-    saldo:number
     telefono:string
     calle:string
     numero:number

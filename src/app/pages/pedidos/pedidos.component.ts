@@ -17,7 +17,7 @@ declare function pluginBootstrapSelect();
 export class PedidosComponent implements OnInit {
 
 
-  pedidos:Array<ObjPedido>;
+  pedidos:Array<ObjPedido> = [];
 
   pedidoNuevo = false;
   textoBotonPedido: string = "Agregar pedido nuevo";
@@ -44,8 +44,6 @@ export class PedidosComponent implements OnInit {
 
       if(respuesta.status == "success"){
         this.pedidos = respuesta.data;
-      }else{
-
       }
     });
 
@@ -59,6 +57,14 @@ export class PedidosComponent implements OnInit {
       this.textoBotonPedido = "Agregar pedido nuevo";
       this.pedido.style.display = "none";
     }
+  }
+
+  newPedidoEvent(){
+    this.pedidosServ.getPedidosBasicAdmin(TOKEN).subscribe((respuesta:ObjRespuestaServidor)=>{
+      if(respuesta.status == "success"){
+        this.pedidos = respuesta.data;
+      }
+    });
   }
 
   irAPedido(pedido){

@@ -57,15 +57,25 @@ export class DashboardComponent implements OnInit {
       "faltan_datos": 1
     }
     this.pedidosServ.getPedidoWhere(data, TOKEN).subscribe((pedidosSinDatos)=>{
-      console.log(pedidosSinDatos);
-      this.pedidosSinDatosRaw = pedidosSinDatos.data;
-      this.pedidosSinDatosCount = pedidosSinDatos.data.length;
-      if(this.pedidosSinDatosCount > 15){
-        this.pedidosSinDatos = pedidosSinDatos.data.splice(0,15);
-      }else{
-        this.pedidosSinDatos = pedidosSinDatos.data;
-      }
+      this.actualizarEstadoPedidosSinDatos(pedidosSinDatos.data);
     })
+  }
+
+  actualizarEstadoPedidosSinDatos(pedidosSinDatos){
+    this.pedidosSinDatosRaw = [];
+    pedidosSinDatos.filter((value)=>{
+      console.log(value)
+      if(value.dia_de_entrega == ""  || value.repartidor_habitual == ""){
+        this.pedidosSinDatosRaw.push(value);
+      }
+    });
+    this.pedidosSinDatosCount = this.pedidosSinDatosRaw.length;
+
+    if(this.pedidosSinDatosCount > 15){
+      this.pedidosSinDatos = this.pedidosSinDatosRaw.splice(0,15);
+    }else{
+      this.pedidosSinDatos = this.pedidosSinDatosRaw;
+    }
   }
 
   irAPedido(pedido, index){

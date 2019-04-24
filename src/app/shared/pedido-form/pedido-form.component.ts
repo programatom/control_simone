@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EmpleadosService, ProductosService, PedidosService } from 'src/app/services/services.index';
 import { TOKEN } from 'src/app/config/config';
 import swal from 'sweetalert';
@@ -12,6 +12,7 @@ export class PedidoFormComponent implements OnInit {
 
   @Input('pedido') pedidoInput: any;
   @Input('nuevo') nuevo: string;
+  @Output("newPedido") newPedido = new EventEmitter();
 
   pedido = new Object() as {
     id?: number
@@ -24,6 +25,8 @@ export class PedidoFormComponent implements OnInit {
     estado: string //select definido previo
     dia_de_entrega: string // un dia o dias separados por commas.
     forma_de_pago: string // select definido previo
+    faltan_datos:number
+    visto:number
   };
 
   productosNuevos: Array<{
@@ -42,14 +45,17 @@ export class PedidoFormComponent implements OnInit {
   constructor(
     private productosServ: ProductosService,
     private empleadosServ: EmpleadosService,
-    private pedidosServ: PedidosService) { }
+    private pedidosServ: PedidosService) {
+
+      this.pedido.faltan_datos = 0;
+      this.pedido.visto = 1;
+    }
 
   ngAfterViewInit() {
   }
 
   ngOnInit() {
 
-    pluginBootstrapSelect();
     if (this.nuevo == "true") {
       this.title = "Pedido nuevo"
       this.subtitle = "Genere un pedido nuevo con un id de usuario válido"
@@ -58,13 +64,11 @@ export class PedidoFormComponent implements OnInit {
       this.subtitle = "No puede cambiar el ID de usuario en la edición del pedido"
     }
 
-    if (this.pedidoInput != null) {
+    if (this.pedidoInput != "null") {
       this.initVarsPedido();
     }else{
       this.pedido.periodicidad = "semanal";
       this.pedido.tipo_de_pedido = "normal";
-      this.pedido.repartidor_habitual = "Tomas";
-      this.pedido.repartidor_excepcional = "Sergio";
       this.pedido.estado = "en proceso";
       this.pedido.forma_de_pago = "efectivo";
     }
@@ -74,14 +78,13 @@ export class PedidoFormComponent implements OnInit {
     });
 
     this.empleadosServ.getEmpleadosBasicAdmin(TOKEN).subscribe((empleados) => {
+      console.log(empleados)
       if (empleados.status == "success") {
-        let empleadosArray = empleados.data;
-        for (let i = 0; i < empleadosArray.length; i++) {
-          let empleado = empleadosArray[i];
-          this.empleados.push(empleado.nombre);
-        }
+        this.empleados = empleados.data;
       }
     });
+    pluginBootstrapSelect();
+
   }
 
   failValidacionCamposPedido() {
@@ -107,6 +110,8 @@ export class PedidoFormComponent implements OnInit {
     if (pedido.descuento < 0 || pedido.descuento > 100) {
       return [true, "El campo de descuento debe ser un numero entre 0 y 100"];
     };
+
+    /*
     var diasSemana = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"];
     if (pedido.periodicidad == "diaria") {
       let dias = pedido.dia_de_entrega.split(",");
@@ -138,6 +143,7 @@ export class PedidoFormComponent implements OnInit {
       }
 
     }
+    */
 
     for (let i = 0; i < keys.length; i++) {
       let key = keys[i];
@@ -181,6 +187,8 @@ export class PedidoFormComponent implements OnInit {
         "id": producto.id
       })
     }
+
+    return;
   }
 
 
@@ -208,6 +216,8 @@ export class PedidoFormComponent implements OnInit {
 
 
 
+
+
     this.pedidosServ.updatePedidoAdmin(data, TOKEN).subscribe((respuesta) => {
       if (respuesta.status == "success") {
         swal("Exito!", "Se guardó el pedido con éxito", "success");
@@ -220,9 +230,12 @@ export class PedidoFormComponent implements OnInit {
 
 
   nuevoPedido(data) {
+    data.pedido.dia_de_entrega = parseInt(data.pedido.dia_de_entrega);
     this.pedidosServ.storePedidoAdmin(data, TOKEN).subscribe((respuesta) => {
       if (respuesta.status == "success") {
+
         swal("Exito!", "Se creó el pedido con éxito", "success");
+        this.newPedido.emit();
         console.log(respuesta);
       } else {
         swal("Error", "No existe el ID de usuario ingresado!", "error");

@@ -6,10 +6,6 @@
         <h6 class="card-subtitle">{{subtitle}}</h6>
         <form class="form-material m-t-40 row">
           <div class="form-group col-md-4 m-t-20">
-            <label>Saldo</label>
-            <input [(ngModel)]="particular.saldo" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
-          </div>
-          <div class="form-group col-md-4 m-t-20">
             <label>Telefono</label>
             <input [(ngModel)]="particular.telefono" [ngModelOptions]="{standalone: true}" type="number" class="form-control">
           </div>
@@ -42,7 +38,7 @@
           </div>
           <div class="form-group col-md-4 m-t-20">
             <label>Obervaciones</label>
-            <input [(ngModel)]="particular.localidad" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+            <input [(ngModel)]="particular.observaciones" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
           </div>
         </form>
         <br>

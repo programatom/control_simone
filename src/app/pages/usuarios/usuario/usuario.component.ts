@@ -23,6 +23,7 @@ export class UsuarioComponent implements OnInit {
     updated_at
     data_rol
     pedidos
+    saldo
 }
   data_rol:any;
   pedidos = {
@@ -54,6 +55,7 @@ export class UsuarioComponent implements OnInit {
       this.usuario.name = usuario.name;
       this.usuario.email = usuario.email;
       this.usuario.role = usuario.role;
+      this.usuario.saldo = usuario.saldo;
       this.usuario.created_at = usuario.created_at;
       this.usuario.updated_at = usuario.updated_at;
       this.data_rol = usuario.data_rol[0];

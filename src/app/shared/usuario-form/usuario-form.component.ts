@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { UsuariosService } from 'src/app/services/services.index';
 import { TOKEN } from 'src/app/config/config';
 
@@ -11,12 +11,14 @@ export class UsuarioFormComponent implements OnInit {
 
   @Input('usuario') usuarioInput: any;
   @Input('nuevo') nuevo: string;
+  @Output('newUser') newUser = new EventEmitter();
 
   usuario = new Object as {
     email:string
     name:string
     password:string
     role:string
+    saldo:number
     password_confirmation:string
   };
 
@@ -29,16 +31,26 @@ export class UsuarioFormComponent implements OnInit {
     if(this.nuevo == "true"){
       this.title = "Crear nuevo usuario";
       this.subtitle = "Una vez creado el usuario podrá agregar más datos pertinentes"
-      this.usuario.email = "";
-      this.usuario.name = "";
-      this.usuario.password = "";
-      this.usuario.password_confirmation = "";
-      this.usuario.role = "particular";
+      this.inicializarUsuario();
     }else{
       this.usuario = this.usuarioInput;
       this.title = "Modificar datos del usuario";
       this.subtitle = "Recuerde realizar cambios en los datos del usuario solo en casos específicos"
     }
+  }
+
+  emmitNewUser(){
+    this.newUser.emit();
+  }
+
+  inicializarUsuario(){
+    this.usuario.email = "";
+    this.usuario.name = "";
+    this.usuario.password = "";
+    this.usuario.password_confirmation = "";
+    this.usuario.saldo = 0;
+    this.usuario.role = "particular";
+    return;
   }
 
   guardarUsuario(){
@@ -50,7 +62,9 @@ export class UsuarioFormComponent implements OnInit {
       this.usuarioServ.registerUser(data).subscribe((respuesta)=>{
         console.log(respuesta);
         if(respuesta.status == "success"){
+          this.inicializarUsuario();
           swal("Exito!", "Se creó el usuario con éxito", "success");
+          this.emmitNewUser();
         }else{
           let errores = respuesta.data;
           let keys = Object.keys(errores);

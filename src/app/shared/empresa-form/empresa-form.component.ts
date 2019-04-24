@@ -11,13 +11,12 @@ export class EmpresaFormComponent implements OnInit {
 
 
   @Input('empresa') empresaInput: any;
-
+  saldo:number = 0;
   empresa = new Object() as {
     nombre:string
     razon_social:string
-    CUIT:number
+    CUIT:string
     dom_fiscal:string
-    saldo:number
     telefono:number
     calle:string
     numero:number

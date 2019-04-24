@@ -24,6 +24,13 @@ export class UsuariosComponent implements OnInit {
     })
   }
 
+
+  newUserEvent(){
+    this.usuariosServ.getUsuarios(TOKEN).subscribe((respuesta)=>{
+      this.usuarios = respuesta.data;
+    })
+  }
+
   irAUsuario(usuario){
     this.router.navigateByUrl("/usuario/" + usuario.id);
   }

@@ -11,16 +11,28 @@
             <label>ID del usuario</label>
             <input [disabled] = "this.nuevo == 'false'"[(ngModel)]="pedido.user_id" [ngModelOptions]="{standalone: true}" type="number" class="form-control form-control-line">
           </div>
-          <div class="form-group col-md-4 m-t-20">
-            <label>Dia / dias de entrega</label>
-            <input [(ngModel)]="pedido.dia_de_entrega" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
-          </div>
+
           <div class="form-group col-md-4 m-t-20">
             <label>Descuento</label>
             <input [(ngModel)]="pedido.descuento" [ngModelOptions]="{standalone: true}" type="number" class="form-control">
           </div>
         </form>
         <div class="row">
+
+          <div class="col-md-4 m-t-20">
+            <h4>Dia de entrega</h4>
+            <select [(ngModel)]="pedido.dia_de_entrega" id="dia_de_entrega" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
+              <option value = "1">Lunes</option>
+              <option value = "2">Martes</option>
+              <option value = "3">Miercoles</option>
+              <option value = "4">Jueves</option>
+              <option value = "5">Viernes</option>
+              <option value = "6">Sabado</option>
+              <option value = "7">Domingo</option>
+
+            </select>
+          </div>
+
           <div class="col-md-4 m-t-20">
             <h4>Periodicidad</h4>
             <select [(ngModel)]="pedido.periodicidad" id="periodicidad" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
@@ -33,21 +45,20 @@
           <div class="col-md-4 m-t-20">
             <h4>Repartidor habitual</h4>
             <select [(ngModel)]="pedido.repartidor_habitual" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
-              <option *ngFor="let empleado of empleados" [value] = "empleado">{{empleado}}</option>
+              <option *ngFor="let empleado of empleados" [value] = "empleado.name">{{empleado.name}}</option>
             </select>
           </div>
           <div class="col-md-4 m-t-20">
             <h4>Repartidor excepcional</h4>
             <select [(ngModel)]="pedido.repartidor_excepcional" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
-              <option *ngFor="let empleado of empleados" [value] = "empleado">{{empleado}}</option>
+              <option *ngFor="let empleado of empleados" [value] = "empleado.name">{{empleado.name}}</option>
             </select>
           </div>
           <div class="col-md-4 m-t-20">
             <h4>Estado</h4>
             <select [(ngModel)]="pedido.estado" class="form-control" data-style="form-control btn-secondary" tabindex="-98">
-              <option value = "cancelada">Cancelado</option>
               <option value = "en proceso">En proceso</option>
-              <option value = "pausada">Pausado</option>
+              <option value = "discontinuado">Discontinuado</option>
             </select>
           </div>
           <div class="col-md-4 m-t-20">
