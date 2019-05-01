@@ -27,7 +27,7 @@
 
 <app-usuario-form id ="usuario-form-edit" nuevo ="false" [usuario] ="usuario" *ngIf="dataInit && usuario.role != 'admin'"></app-usuario-form>
 
-<div class="row" *ngIf="usuario.role != 'admin'">
+<div class="row" *ngIf="usuario.role != 'admin' && usuario.role != 'empleado'">
   <div class="col-12">
     <button
     class="btn waves-effect waves-light btn-rounded btn-block btn-success"
@@ -42,4 +42,6 @@
 
 <app-empresa-form id="empresa-form" [empresa]="data_rol" *ngIf="dataInit && usuario.role == 'empresa'"></app-empresa-form>
 
+<!--
 <app-empleado-form id="empleado-form" [empleado]="data_rol" *ngIf="dataInit && usuario.role == 'empleado'"></app-empleado-form>
+-->

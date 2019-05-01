@@ -14,7 +14,7 @@
         <h3 class="card-title"><strong>Periodicidad: </strong>{{pedido.periodicidad}}</h3>
         <h3 class="card-title"><strong>Estado: </strong>{{pedido.estado}}</h3>
         <h3 class="card-title"><strong>Forma de pago: </strong>{{pedido.forma_de_pago}}</h3>
-        <h3 class="card-title"><strong>Dia de entrega: </strong>{{pedido.dia_de_entrega}}</h3>
+        <h3 class="card-title"><strong>Dia de entrega: </strong>{{pedido.dia_de_entrega | fecha}}</h3>
         <h3 class="card-subtitle"><strong>Pedido creado en: </strong>{{pedido.created_at}}</h3>
       </div>
     </div>

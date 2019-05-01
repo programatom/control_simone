@@ -17,6 +17,8 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 import { ProductosComponent } from './productos/productos.component';
 import { ProductoComponent } from './productos/producto/producto.component';
+import { FechaPipe } from '../pipes/fecha.pipe';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,11 @@ import { ProductoComponent } from './productos/producto/producto.component';
     PAGES_ROUTES,
     FormsModule,
     SharedModule,
-    ServicesModule
+    ServicesModule,
+    PipesModule
+  ],
+  providers:[
+    FechaPipe
   ]
 })
 export class PagesModule { }

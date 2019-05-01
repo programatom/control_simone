@@ -38,10 +38,9 @@ export class PedidosComponent implements OnInit {
     this.pedido = this._document.getElementById("pedido-form-1");
     this.pedido.style.display = "none";
     pluginBootstrapSelect()
-    this.pedidosServ.getPedidosBasicAdmin(TOKEN).subscribe((respuesta:ObjRespuestaServidor)=>{
+    this.pedidosServ.getPedidosBasicAdmin(TOKEN, false).subscribe((respuesta:ObjRespuestaServidor)=>{
       initPluginDataTable();
-      console.log(respuesta.data)
-
+      console.log(respuesta)
       if(respuesta.status == "success"){
         this.pedidos = respuesta.data;
       }

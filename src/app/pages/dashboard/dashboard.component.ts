@@ -53,10 +53,11 @@ export class DashboardComponent implements OnInit {
         this.pedidosSinVer = pedidosSinVer.data;
       }
     })
-    let data = {
-      "faltan_datos": 1
-    }
+    let data = [
+      {"faltan_datos": 1}
+    ]
     this.pedidosServ.getPedidoWhere(data, TOKEN).subscribe((pedidosSinDatos)=>{
+      console.log(pedidosSinDatos)
       this.actualizarEstadoPedidosSinDatos(pedidosSinDatos.data);
     })
   }

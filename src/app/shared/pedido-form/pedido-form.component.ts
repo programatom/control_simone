@@ -19,7 +19,6 @@ export class PedidoFormComponent implements OnInit {
     user_id: number
     descuento: number
     periodicidad: string //select definido previo
-    tipo_de_pedido: string // select definido previo
     repartidor_habitual: string //select según datos de tabla
     repartidor_excepcional: string //select según datos de tabla
     estado: string //select definido previo
@@ -49,6 +48,8 @@ export class PedidoFormComponent implements OnInit {
 
       this.pedido.faltan_datos = 0;
       this.pedido.visto = 1;
+
+
     }
 
   ngAfterViewInit() {
@@ -68,7 +69,6 @@ export class PedidoFormComponent implements OnInit {
       this.initVarsPedido();
     }else{
       this.pedido.periodicidad = "semanal";
-      this.pedido.tipo_de_pedido = "normal";
       this.pedido.estado = "en proceso";
       this.pedido.forma_de_pago = "efectivo";
     }
@@ -92,7 +92,6 @@ export class PedidoFormComponent implements OnInit {
     let keys = ["user_id",
       "descuento",
       "periodicidad",
-      "tipo_de_pedido",
       "repartidor_habitual",
       "repartidor_excepcional",
       "estado",
@@ -109,6 +108,10 @@ export class PedidoFormComponent implements OnInit {
 
     if (pedido.descuento < 0 || pedido.descuento > 100) {
       return [true, "El campo de descuento debe ser un numero entre 0 y 100"];
+    };
+
+    if (this.productosNuevos.length == 0 ) {
+      return [true, "Debe haber al menos un producto en el pedido!"];
     };
 
     /*
@@ -166,7 +169,6 @@ export class PedidoFormComponent implements OnInit {
     this.pedido.descuento = this.pedidoInput.descuento;
     this.pedido.dia_de_entrega = this.pedidoInput.dia_de_entrega;
     this.pedido.periodicidad = this.pedidoInput.periodicidad;
-    this.pedido.tipo_de_pedido = this.pedidoInput.tipo_de_pedido;
     this.pedido.repartidor_habitual = this.pedidoInput.repartidor_habitual;
     this.pedido.repartidor_excepcional = this.pedidoInput.repartidor_excepcional;
     this.pedido.estado = this.pedidoInput.estado;
@@ -209,7 +211,7 @@ export class PedidoFormComponent implements OnInit {
       "productos": this.productosNuevos
     };
 
-    if (this.nuevo) {
+    if (this.nuevo == "true") {
       this.nuevoPedido(data);
       return;
     }
@@ -235,6 +237,11 @@ export class PedidoFormComponent implements OnInit {
       if (respuesta.status == "success") {
 
         swal("Exito!", "Se creó el pedido con éxito", "success");
+        this.productosNuevos = [];
+        this.pedido = new Object() as any;
+        this.pedido.periodicidad = "semanal";
+        this.pedido.estado = "en proceso";
+        this.pedido.forma_de_pago = "efectivo";
         this.newPedido.emit();
         console.log(respuesta);
       } else {
@@ -242,6 +249,7 @@ export class PedidoFormComponent implements OnInit {
       }
     })
   }
+
   agregarProductoAPedidoNuevo(producto) {
 
     let insert = true;

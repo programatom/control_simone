@@ -115,6 +115,8 @@ export class UsuarioComponent implements OnInit {
       },100)
     }
 
+    /*
+
     if(role == "empleado"){
       // MUESTRO META DATA Y PEDIDOS
 
@@ -129,6 +131,7 @@ export class UsuarioComponent implements OnInit {
         return;
       },100)
     }
+    */
   }
 
 }
